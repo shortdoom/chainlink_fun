@@ -72,6 +72,7 @@
     "typechain": "hardhat typechain"
   },
   "dependencies": {
+    "@chainlink/contracts": "^0.1.6",
     "solc": "0.8.1"
   }
 }

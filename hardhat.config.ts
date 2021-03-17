@@ -51,9 +51,12 @@ function createTestnetConfig(network: keyof typeof chainIds): NetworkUserConfig 
 }
 
 const config: HardhatUserConfig = {
-  defaultNetwork: "hardhat",
+  defaultNetwork: "kovan",
   networks: {
     hardhat: {
+      forking: {
+        url: "https://mainnet.infura.io/v3/26eee67f5f434312aefbfcb1583605ef",
+      },
       accounts: {
         mnemonic,
       },
@@ -71,7 +74,7 @@ const config: HardhatUserConfig = {
     tests: "./test",
   },
   solidity: {
-    version: "0.8.1",
+    version: "0.7.4",
     settings: {
       // https://hardhat.org/hardhat-network/#solidity-optimizer-support
       optimizer: {

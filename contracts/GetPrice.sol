@@ -1,31 +1,24 @@
 pragma solidity 0.7.4;
 
 import "@chainlink/contracts/src/v0.6/interfaces/AggregatorV3Interface.sol";
+import "./Feeder.sol";
 
-contract PriceConsumerV3 {
-
+contract PriceConsumerV3 is Feeder {
     AggregatorV3Interface internal priceFeed;
 
-    /**
-     * Network: Kovan
-     * Aggregator: ETH/USD
-     * Address: 0x9326BFA02ADD2366b30bacB125260Af641031331
-     */
-    constructor() public {
-        priceFeed = AggregatorV3Interface(0x9326BFA02ADD2366b30bacB125260Af641031331);
-    }
+    constructor(address[] memory _tokens, address[] memory _feeds) public Feeder(_tokens, _feeds) {}
 
     /**
-     * Returns the latest price
+        Mock contract to demonstrate logic of finding right Price Feed for given token.
      */
-    function getLatestPrice() public view returns (int) {
-        (
-            uint80 roundID, 
-            int price,
-            uint startedAt,
-            uint timeStamp,
-            uint80 answeredInRound
-        ) = priceFeed.latestRoundData();
-        return price;
+    function getLatestPriceForToken(address token) public returns (int256) {
+        address feed = getFeedForToken(token);
+        priceFeed = AggregatorV3Interface(feed);
+        (uint80 roundID, int256 price, uint256 startedAt, uint256 timeStamp, uint80 answeredInRound) =
+            priceFeed.latestRoundData();
+
+        // Do something with Price Feed Data
+
+        return(price);
     }
 }

@@ -2,9 +2,7 @@ pragma solidity 0.7.4;
 pragma experimental ABIEncoderV2;
 
     /**
-    Whitelist should be initialized at deployment.
-    Constructor creates a list of available price feeds for chainlink.
-    This contract is only called in relation to chainlink feed.
+    Check if token has available PriceFeed
     https://docs.chain.link/docs/ethereum-addresses
      */
 

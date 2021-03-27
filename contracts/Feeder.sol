@@ -14,7 +14,7 @@ contract Feeder {
         address[] memory _tokens,
         address[] memory _feeds
     ) {
-        for (uint256 i = 0; i > _feeds.length; i++) {
+        for (uint256 i = 0; i < _feeds.length; i++) {
             feedList[_tokens[i]] = _feeds[i];
         }
     }

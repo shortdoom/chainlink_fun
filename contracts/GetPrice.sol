@@ -10,6 +10,7 @@ contract PriceConsumerV3 is Feeder {
 
     /**
         Mock contract to demonstrate logic of finding right Price Feed for given token.
+        You need link tokens to execute this, otherwise it will revert.
      */
     function getLatestPriceForToken(address token) public returns (int256) {
         address feed = getFeedForToken(token);

@@ -1,18 +1,23 @@
 import { ethers } from "hardhat";
 import { Contract, ContractFactory } from "ethers";
+var fs = require("fs");
 
 async function main(): Promise<void> {
 
-  const Greeter: ContractFactory = await ethers.getContractFactory("PriceConsumerV3");
-  const greeter: Contract = await Greeter.deploy();
-  await greeter.deployed();
+  const feeds = await fs.readFileSync("scripts/feeds.txt", "utf-8").split('\n');
+  const tokens = await fs.readFileSync("scripts/tokens.txt", "utf-8").split('\n');
 
-  console.log("Greeter deployed to: ", greeter.address);
+  const GetPrice: ContractFactory = await ethers.getContractFactory("PriceConsumerV3");
+  const getprice: Contract = await GetPrice.deploy(tokens, feeds);
+  await getprice.deployed();
+
+  console.log("Contract deployed to: ", getprice.address);
 
   await getPrice();
+
   async function getPrice() {
-    const price = await greeter.getLatestPrice();
-    console.log(price);
+    const feed = await getprice.getFeedForToken(tokens[0]);
+    console.log("Token", tokens[0], "feed is", feed);
   }
 
 }

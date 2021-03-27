@@ -51,12 +51,9 @@ function createTestnetConfig(network: keyof typeof chainIds): NetworkUserConfig 
 }
 
 const config: HardhatUserConfig = {
-  defaultNetwork: "kovan",
+  defaultNetwork: "hardhat",
   networks: {
     hardhat: {
-      forking: {
-        url: "https://mainnet.infura.io/v3/26eee67f5f434312aefbfcb1583605ef",
-      },
       accounts: {
         mnemonic,
       },
